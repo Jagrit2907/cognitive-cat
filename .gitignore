@@ -1,21 +1,65 @@
-# Logs
-logs
-*.log
+# =========================
+# Node / React / Vite
+# =========================
+node_modules/
+dist/
+dist-ssr/
+*.local
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
 
-# Editor directories and files
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+
+# =========================
+# Machine Learning
+# =========================
+# Ignore trained models unless intentionally versioned
+*.pkl
+
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+
+# =========================
+# Editor / OS
+# =========================
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
