@@ -1,16 +1,32 @@
-# React + Vite
+# 🐱 KittyCue
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack ADHD focus helper that monitors behavioral signals such as typing patterns, mouse movement, and inactivity, and uses machine learning to predict the user's real-time focus state.
 
-Currently, two official plugins are available:
+KittyCue combines a Chrome Extension with a Flask-based machine learning backend to collect behavioral features, perform real-time inference, and display the predicted focus state through an adaptive Cat Mascot interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🧠 How It Works
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+KittyCue follows a simple pipeline:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+User Interaction
+       ↓
+Chrome Extension
+       ↓
+Behavioral Signal Collection
+       ↓
+Feature Extraction & Aggregation
+       ↓
+Feature Vector
+       ↓
+Flask REST API
+       ↓
+Random Forest Model
+       ↓
+Focus State Prediction
+       ↓
+Chrome Extension
+       ↓
+Adaptive Cat Mascot + Confidence
