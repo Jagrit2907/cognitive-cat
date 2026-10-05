@@ -1,35 +1,75 @@
 # KittyCue
 
-A full-stack solution designed as an ADHD focus helper to monitor user behavior (keystrokes, mouse movements, window activity) and predict real-time focus levels using machine learning.
+A full-stack solution designed as an ADHD focus helper to monitor user behavior such as keystroke patterns, mouse movement, window activity, and inactivity, and predict focus states using machine learning.
 
-This project consists of two main components:
+The project consists of two main components:
 
-1. **Backend**: A lightweight Flask REST API that serves a predictive machine learning model.
-2. **Frontend**: A sleek, modern Chrome Extension that captures behavioral signals and displays the predicted focus state.
-
-## 🧠 How it Works
-
-1. The Chrome Extension runs in the background and injects a content script into web pages.
-2. It passively monitors typing speed, inter-key delay (IKD), hold times, mouse speed, and inactivity.
-3. Every 60 seconds, it computes summary statistics (mean, std, median, etc.) and sends a feature vector to the backend.
-4. The backend evaluates these features against a trained model (Random Forest by default) and returns a real-time cognitive state, mapping to `FOCUSED`, `DISTRACTED`, or `INACTIVE`.
-5. The Chrome Extension popup displays this status using a dark-themed glassmorphism UI featuring an adaptive Cat Mascot that reacts to the current focus level.
+1. **Backend**: A Flask REST API that provides machine learning inference and model-related endpoints.
+2. **Frontend**: A Chrome Extension that collects behavioral signals, extracts features, and displays the predicted focus state.
 
 ---
 
-## 🔧 Backend Setup (Flask API)
+## 🧠 How It Works
 
-The backend exposes real-time inference and training endpoints.
+1. The Chrome Extension runs in the background and collects behavioral signals from user interaction.
+2. The system processes signals such as typing behavior, inter-key delay (IKD), key hold times, mouse movement, window activity, and inactivity.
+3. The collected signals are transformed into statistical features such as means, standard deviations, medians, counts, and other derived measurements.
+4. These features are combined into a feature vector and sent to the Flask backend.
+5. The backend uses a trained machine learning model to predict the user's focus state.
+6. The predicted state and associated information are returned to the Chrome Extension and displayed through the extension interface.
 
-### Requirements
+The focus states used by the system are:
 
-- Python 3.8+
-- Dependencies: `flask`, `pandas`, `numpy`, `scikit-learn` (install via `pip install -r Backend/requirements.txt` if available)
+- `FOCUSED`
+- `DISTRACTED`
+- `INACTIVE`
 
-### Running the API Server
+---
 
-Navigate to the backend directory and start the server:
+## 🔍 Behavioral Features
 
-```bash
-cd Backend
-python api_server.py
+KittyCue uses behavioral patterns rather than the actual content of the user's activity.
+
+The feature extraction pipeline works with signals including:
+
+- Keystroke timing
+- Inter-key delay (IKD)
+- Key hold time
+- Typing speed
+- Mouse movement
+- Window activity
+- Inactivity
+
+The raw signals are transformed into numerical features that can be used by the machine learning model.
+
+Examples of extracted features include:
+
+- Mean values
+- Standard deviation
+- Median
+- Counts
+- Total inactivity duration
+- Average inactivity duration
+- Mouse movement statistics
+- Typing speed
+- Inter-key delay statistics
+- Window activity statistics
+
+---
+
+## 🤖 Machine Learning
+
+KittyCue uses a **Random Forest classifier** for focus-state prediction.
+
+### Input
+
+The model receives a numerical feature vector representing the user's recent behavioral activity.
+
+### Output
+
+The model predicts one of the following focus states:
+
+```text
+FOCUSED
+DISTRACTED
+INACTIVE
